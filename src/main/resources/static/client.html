@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户端</title>
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
+    <link href="css/client.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<form>
+    <table>
+        <caption>
+            订单
+        </caption>
+        <tbody>
+        <tr>
+            <th>
+                商品名：
+            </th>
+            <td>
+                <select name="item" id="item">
+
+                </select>
+            </td>
+            <td>
+                剩余数量：
+            </td>
+            <td id="number">
+
+            </td>
+        </tr>
+        <tr>
+            <th>
+                收件人：
+            </th>
+            <td>
+                <input name="name" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                手机号：
+            </th>
+            <td>
+                <input name="tel" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                收件地址：
+            </th>
+            <td>
+                <input name="addr" type="text"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" id="submit">提交</button>
+    <button type="reset">重置</button>
+</form>
+</body>
+</html>

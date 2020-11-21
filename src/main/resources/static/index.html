@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>巴拉巴拉</title>
+    <link href="css/index.css" type="text/css" rel="stylesheet"/>
+    <link href="tameplates/123.jpg" type="image/jpg" rel="icon"/>
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+<h1>很迷的管理系统</h1>
+    <span id="showTips">我是提示</span>
+    <div class="center">
+        <div class="top">
+            <a href="#tab1">库存</a>
+            <a href="#tab2">订单</a>
+            <a href="#tab3">入库</a>
+            <a href="#tab4">暂定</a>
+        </div>
+        <div class="out">
+            <div class="in" id="tab1">
+                <table>
+                    <caption>
+                        <label id="cxkc">查询库存</label>
+                    </caption>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="in" id="tab2">
+                <table>
+                    <caption>
+                        <input id="select-order" value="查询"/>
+                        <label>查询订单</label>
+                        <button id="yfh">已发货</button><button id="yfk">已付款</button><button id="del">删除</button>
+                    </caption>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="in" id="tab3">
+                <table>
+                    <caption>
+                        入库
+                    </caption>
+                    <tbody>
+                    <form>
+                        <tr>
+                            <th>
+                                货物名
+                            </th>
+                            <td>
+                                <select id="item_name">
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                数量
+                            </th>
+                            <td id="HaveNumber">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                变动数量
+                            </th>
+                            <td>
+                                <input type="number" id="change-number" min="0"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                出入库？
+                            </th>
+                            <td>
+                                <label>
+                                    出库
+                                    <input name="crk" type="radio" value="out"/>
+                                </label>
+                                <label>
+                                    入库
+                                    <input name="crk" type="radio" value="in"/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr id="hidden">
+                            <td colspan="2">
+                                <div class="button" name="commitCRK">
+                                    提交
+                                </div>
+                            </td>
+                        </tr>
+                    </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
