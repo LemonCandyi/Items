@@ -39,12 +39,12 @@ th{
     width: 250px;
 }
 #tab2>table>tbody>tr:first-child>th:first-child{
-    width: 50px;
+    width: 100px;
 }
-#tab2>table>caption>button{
+.right-button{
     float: right;
 }
-#select-order{
+.left-button{
     float: left !important;
     cursor: pointer;
 }

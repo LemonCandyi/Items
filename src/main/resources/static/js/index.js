@@ -6,11 +6,10 @@ $(document).ready(function () {
     fukuan();
     fahuo();
     selectItemName();
-    // selectNumber();
     selectNumberInit();
     commitCRK();
     CRKcheck();
-
+    del();
 });
 
 function selectKC() {
@@ -23,7 +22,6 @@ function selectKC() {
                 url: '/selectAll',
                 datatype: "json",
                 success: function (data) {
-                    console.log(data);
                     $("td").css("border","solid red 1px");
                     $.each(data,function (i,item) {
                         $("#tab1>table>tbody").append("<tr><td>"+item.item_name+"</td><td>"+item.item_no+"</td><td>"+item.number+"</td></tr>");
@@ -35,18 +33,15 @@ function selectKC() {
 
 function selectorder() {
     $("#tab2>table>tbody").empty().append("<tr><th><input type='checkbox' id='allcheck' class='checkall'/></th><th>订单编号</th></th><th>货物名</th>" +
-        "<th>货物编号</th><th>收件人</th><th>收件人地址</th><th>收件人手机号</th><th>是否发货</th><th>是否付款</th></tr>");
+        "<th>货物编号</th><th>收件人</th><th>收件人地址</th><th>手机号</th><th>是否发货</th><th>是否付款</th></tr>");
     $("#select-order").click(function () {
         $("#tab2>table>tbody").empty().append("<tr><th><input type='checkbox'  id='allcheck' class='checkall'/></th><th>订单编号</th><th>货物名</th>" +
-            "<th>货物编号</th><th>收件人</th><th>收件人地址</th><th>收件人手机号</th><th>是否发货</th><th>是否付款</th></tr>");
+            "<th>货物编号</th><th>收件人</th><th>收件人地址</th><th>手机号</th><th>是否发货</th><th>是否付款</th></tr>");
         $.ajax({
             type: 'POST',
             url: '/selectOrder',
             datatype: "json",
             success: function (data) {
-                console.log(data);
-                number = data.length;
-                console.log(number);
                 $("td").css("border","solid red 1px");
                 $.each(data,function (i,item) {
                     $("#tab2>table>tbody").append("<tr><td><input type='checkbox' name='checkbox' class='checkall' value='"+item.order_no+"'/></td>><td>"+item.order_no+"</td><td>"+item.item_name+"</td><td>"+item.item_no+"</td><td>"+item.user_name+"</td><td>"+item.addr+"</td><td>"+item.tel+"</td><td>"+item.yn_fh+"</td><td>"+item.yn_sk+"</td></tr>");
@@ -63,41 +58,14 @@ function selectorder() {
     });
 }
 
-function fukuan() {
-    $("#yfk").click(function () {
-        var chk_value =[];
-        $("input[name='checkbox']:checked").each(function(){
-            chk_value.push($(this).val());
-        });
-        console.log(chk_value);
-        if(chk_value.length==0){
-            alert("你还没有选择任何内容！");
-        }else if(confirm('确定选中订单已付款吗？')){
-            $.ajax({
-                url:"/fukuan",
-                type:"POST",
-                datatype:"text",
-                contentType:"application/json",
-                data:JSON.stringify({"num":chk_value}),
-                success:function (data) {
-                    switch (data) {
-                        case "1":alert("OJBK了");
-                        case "2":alert("你一次搞的有点多，建议刷新一下");
-                        case "0":alert("失败了，刷新试试")
-                    }
-                }
-            })
-        }
-    })
-}
-
 function fahuo() {
     $("#yfh").click(function () {
-        var chk_value_fh =[];
+        let chk_value_fh =[];
         $("input[name='checkbox']:checked").each(function(){
             chk_value_fh.push($(this).val());
         });
-        if(chk_value.length==0){
+        console.log(chk_value_fh);
+        if(chk_value_fh.length==0){
             alert("你还没有选择任何内容！");
         }else if(confirm('确定选中订单已付款吗？')){
             $.ajax({
@@ -109,7 +77,81 @@ function fahuo() {
                 success:function (data) {
                     switch (data) {
                         case "1":alert("OJBK了");
+                            $("input[name='checkbox']:checked").parent().siblings().eq(6).text("是");
+                            break;
                         case "2":alert("你一次搞的有点多，建议刷新一下看看是否成功");
+                            $("input[name='checkbox']:checked").each(function(){
+                                $(this).parent().siblings().eq(7).text("是");
+                            });
+                            break;
+                        case "0":alert("失败了，刷新试试")
+                    }
+                }
+            })
+        }
+    })
+}
+
+function fukuan() {
+    $("#yfk").click(function () {
+        let chk_value_fk =[];
+        $("input[name='checkbox']:checked").each(function(){
+            chk_value_fk.push($(this).val());
+        });
+        if(chk_value_fk.length==0){
+            alert("你还没有选择任何内容！");
+        }else if(confirm('确定选中订单已付款吗？')){
+            $.ajax({
+                url:"/fukuan",
+                type:"POST",
+                datatype:"text",
+                contentType:"application/json",
+                data:JSON.stringify({"num":chk_value_fk}),
+                success:function (data) {
+                    switch (data) {
+                        case "1":alert("OJBK了");
+                            $("input[name='checkbox']:checked").parent().siblings().eq(7).text("是");
+                        break;
+                        case "2":alert("你一次搞的有点多，建议刷新一下");
+                            $("input[name='checkbox']:checked").each(function(){
+                                $(this).parent().siblings().eq(7).text("是");
+                            });
+                        break;
+                        case "0":alert("失败了，刷新试试");
+                    }
+                }
+            })
+        }
+    })
+}
+
+
+
+function del() {
+    $("#del").click(function () {
+        let chk_value_del =[];
+        $("input[name='checkbox']:checked").each(function(){
+            chk_value_del.push($(this).val());
+        });
+        if(chk_value_del.length==0){
+            alert("你还没有选择任何内容！");
+        }else if(confirm('确定删除已选中订单？')){
+            $.ajax({
+                url:"/deleteOrder",
+                type:"POST",
+                datatype:"text",
+                contentType:"application/json",
+                data:JSON.stringify({"num":chk_value_del}),
+                success:function (data) {
+                    switch (data) {
+                        case "1":alert("OJBK了");
+                            $("input[name='checkbox']:checked").parent().parent().css("display","none");
+                            break;
+                        case "2":alert("你一次搞的有点多，建议刷新一下看看是否成功");
+                            $("input[name='checkbox']:checked").each(function(){
+                                $(this).parent().parent().css("display","none");
+                            });
+                            break;
                         case "0":alert("失败了，刷新试试")
                     }
                 }
@@ -126,7 +168,7 @@ function selectItemName(){
         success:function (data) {
             $.each(data,function (i,item_name) {
                 $("#item_name").append("<option>"+item_name+"</option>");
-            })
+            });
             selectNumber();
             selectNumberInit();
         }
@@ -210,5 +252,3 @@ function commitCRK() {
             })
     })
 }
-
-//todo 变动数量js与后端

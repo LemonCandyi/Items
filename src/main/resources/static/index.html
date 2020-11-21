@@ -7,6 +7,7 @@
     <link href="tameplates/123.jpg" type="image/jpg" rel="icon"/>
     <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script>
     </script>
 </head>
@@ -24,7 +25,8 @@
             <div class="in" id="tab1">
                 <table>
                     <caption>
-                        <label id="cxkc">查询库存</label>
+                        <div id="cxkc" class="button left-button">查询</div>
+                        <label>库存</label>
                     </caption>
                     <tbody>
 
@@ -35,9 +37,11 @@
             <div class="in" id="tab2">
                 <table>
                     <caption>
-                        <input id="select-order" value="查询"/>
-                        <label>查询订单</label>
-                        <button id="yfh">已发货</button><button id="yfk">已付款</button><button id="del">删除</button>
+                        <div id="select-order" class="button left-button">查询</div>
+                        <label>订单</label>
+                        <div id="yfh" class="right-button">已发货</div>
+                        <div id="yfk" class="right-button">已付款</div>
+                        <div id="del" class="right-button">删除</div>
                     </caption>
                     <tbody>
 

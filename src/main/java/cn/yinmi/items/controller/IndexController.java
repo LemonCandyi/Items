@@ -60,4 +60,11 @@ public class IndexController {
         String result = indexService.inOutBound(data);
         return result;
     }
+
+    @RequestMapping("/deleteOrder")
+    @ResponseBody
+    public String deleteOrder(@RequestBody String data){
+        String result = indexService.deleteOrder(data);
+        return result;
+    }
 }

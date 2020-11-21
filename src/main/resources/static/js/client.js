@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    check();
     $("#itm").empty();
     $.ajax({
         url: "/selectItemName",
@@ -13,7 +14,7 @@ $(document).ready(function () {
     )
 
     $("#item").blur(function () {
-        var name=$("#item option:selected").text();
+        let name=$("#item option:selected").text();
         $.ajax({
             url: "/selectItemNumber",
             type: "POST",
@@ -29,7 +30,7 @@ $(document).ready(function () {
     })
 
     $("#submit").click(function () {
-        var temp = "item:"+$("[name=\"item\"]").val()+",name:"+$("[name=\"name\"]").val()+",tel:"+$("[name=\"tel\"]").val()+",addr:"+$("[name=\"addr\"]").val();
+        let temp = "item:"+$("[name=\"item\"]").val()+",name:"+$("[name=\"name\"]").val()+",tel:"+$("[name=\"tel\"]").val()+",addr:"+$("[name=\"addr\"]").val();
         console.log(temp)
         // temp = "{"+temp+"}";
         // console.log(temp);
@@ -51,3 +52,32 @@ $(document).ready(function () {
         })
     })
 })
+
+function check() {
+    $("input").blur(function () {
+        if(checkone($("[name=name]"),"请填写收件人姓名")){
+            return null;
+        }
+        if(checkone($("[name=tel]"),"请填写手机号")){
+            return null;
+        }
+        if(checkone($("[name=addr]"),"请填写收件地址")){
+            return null;
+        }
+        $("#submit").css("display","block");
+    });
+}
+
+function checkone(obj,msg) {
+    let temp = obj.val();
+    if(temp == ""){
+        alert(msg);
+        return true;
+    }else {
+        return false;
+    }
+}
+function isEmpty(obj) {
+    let temp = obj.val();
+    return temp.length > 0 ? true : false;
+}

@@ -83,4 +83,18 @@ public class IndexService {
         }
         return "error";
     }
+
+    public String deleteOrder(String data){
+        String str = data.substring(9,data.length()-3).replace("\"","");
+        if(str.length()>1){
+            String[] strs = str.split(",");
+            for (int i = 0; i < strs.length-1; i++) {
+                indexMapper.deleteOrder(strs[i]);
+            }
+            return "2";
+        }
+        int temp = indexMapper.deleteOrder(str);
+        String result = new Integer(temp).toString();
+        return result;
+    }
 }
